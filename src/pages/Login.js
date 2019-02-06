@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {observer, inject} from 'mobx-react';
 import styled from 'styled-components';
 
 import background from '../assets/images/background.png';
@@ -59,23 +60,46 @@ const Button = styled.button`
   color: #FFF;
 `;
 
+@inject('student')
+@observer
 class Login extends Component {
   state = {
+    loading: false,
     username: '',
     password: ''
   };
 
+  handleSubmit() {
+    const {student} = this.props;
+    const {username, password} = this.state;
+
+    if (username && password) {
+      this.setState({loading: true});
+      student.login(username, password).then(res => {
+        this.setState({loading: false});
+        alert("로그인되었습니다.");
+        window.location.reload();
+      }).catch(err => {
+        this.setState({loading: false});
+        alert("로그인에 실패했습니다.");
+      })
+    } else {
+      alert("빈칸이 있습니다.");
+    }
+  }
+
   render() {
     return (
       <Wrapper>
+        {/*{this.state.loading ? }*/}
         <TitleWrapper>
           <Title>WhatNi</Title>
           <Description>고품격 출석체크 서비스</Description>
         </TitleWrapper>
-        <InputWrapper>
+        <InputWrapper onKeyPress={(event) => {if (event.key === 'Enter') this.handleSubmit()}}>
           <Input placeholder={'Username'} onChange={(event) => this.setState({username: event.target.value})}/>
           <Input type={'password'} placeholder={'Password'} onChange={(event) => this.setState({password: event.target.value})}/>
-          <Button>로그인</Button>
+          <Button onClick={this.handleSubmit.bind(this)}>로그인</Button>
         </InputWrapper>
       </Wrapper>
     );
