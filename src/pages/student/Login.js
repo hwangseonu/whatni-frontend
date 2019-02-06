@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import styled from 'styled-components';
 
-import background from '../assets/images/background.png';
-import Loading from "../components/Loading";
+import background from '../../assets/images/background.png';
+import Loading from "../../components/Loading";
 
 const Wrapper = styled.div`
   background: url(${background}) no-repeat center center fixed;

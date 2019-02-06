@@ -2,7 +2,8 @@ import React, {Component, Fragment} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
 
-import Login from './pages/Login';
+import Login from './pages/student/Login';
+import Main from './pages/student/Main';
 import Splash from './components/Splash';
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
           <Fragment>
             <Route path={'/'} component={Splash}/>
             <Fragment>
+              <Route path={'/'} component={Main} exact/>
               <Route path={'/login'} component={Login} exact/>
             </Fragment>
           </Fragment>
