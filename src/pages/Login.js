@@ -3,6 +3,7 @@ import {observer, inject} from 'mobx-react';
 import styled from 'styled-components';
 
 import background from '../assets/images/background.png';
+import Loading from "../components/Loading";
 
 const Wrapper = styled.div`
   background: url(${background}) no-repeat center center fixed;
@@ -91,7 +92,7 @@ class Login extends Component {
   render() {
     return (
       <Wrapper>
-        {/*{this.state.loading ? }*/}
+        {this.state.loading ? <Loading/> : null}
         <TitleWrapper>
           <Title>WhatNi</Title>
           <Description>고품격 출석체크 서비스</Description>
