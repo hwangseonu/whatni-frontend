@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Clock from 'react-live-clock';
 import styled from 'styled-components';
+import queryString from 'query-string';
 
 import StudentCard from '../../components/StudentCard';
 
@@ -43,6 +44,7 @@ const Time = styled.div`
 
 const Form = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
 `;
 
@@ -76,7 +78,15 @@ const Button = styled.button`
 `;
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      code: queryString.parse(this.props.location.search).code
+    };
+  }
+
   render() {
+    console.log(this.state.code);
     return (
       <Wrapper className={'main'}>
         <StudentCard/>
@@ -84,7 +94,7 @@ class Main extends Component {
           <Date><Clock format={'YYYY.MM.DD'} ticking={true}/></Date>
           <Time><Clock format={'HH:mm:ss'} ticking={true}/></Time>
           <Form>
-            <Input placeholder={'출석코드'}/>
+            <Input placeholder={'출석코드'} value={this.state.code} onChange={({target}) => this.setState({code: target.value})}/>
             <Button>출석</Button>
           </Form>
         </MainWrapper>
