@@ -6,9 +6,16 @@ import background from '../../assets/images/background.png';
 import Loading from "../../components/Loading";
 
 const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: url(${background}) no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
+  
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  } 
 `;
 
 const TitleWrapper = styled.div`
@@ -16,13 +23,22 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 350px);
-  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px 0 0 20px;
+  width: 450px;
+  height: 450px;
+  background: #65C6F7;
+  
+  @media screen and (max-width: 768px) {
+    width: 100%;;
+    height: calc(100vh - 300px);
+    border-radius: 0 0 0 0;
+    background: rgba(101, 198, 247, 0.7);
+  } 
 `;
 
 const Title = styled.span`
   color: #fff;
-  font-size: 10vmax;
+  font-size: 3em;
   font-weight: bold;
 `;
 
@@ -36,12 +52,21 @@ const InputWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 350px;
+  width: 650px;
+  height: 450px;
   background: #FFF;
+  border-radius: 0 20px 20px 0;
+  
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 300px;
+    border-radius: 0 0 0 0;
+    background: rgba();
+  } 
 `;
 
 const Input = styled.input`
-  width: 30vw;
+  width: 350px;
   height: 50px;
   border: 1px solid #000;
   border-radius: 25px;
@@ -56,17 +81,23 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 30vw;
+  width: 350px;
   height: 50px;
   border: none;
   border-radius: 25px;
   background: #5978E3;
   font-size: 1.3em;
   color: #FFF;
-  
+   
   @media screen and (max-width: 768px) {
     width: 70vw;
   }
+`;
+
+const RegisterMessage = styled.a`
+  color: #2868B2;
+  text-decoration: none;
+  font-size: smaller;
 `;
 
 @inject('student')
@@ -105,10 +136,17 @@ class Login extends Component {
           <Title>WhatNi</Title>
           <Description>고품격 출석체크 서비스</Description>
         </TitleWrapper>
-        <InputWrapper onKeyPress={(event) => {if (event.key === 'Enter') this.handleSubmit()}}>
+        <InputWrapper onKeyPress={(event) => {
+          if (event.key === 'Enter') this.handleSubmit()
+        }}>
           <Input placeholder={'Username'} onChange={(event) => this.setState({username: event.target.value})}/>
-          <Input type={'password'} placeholder={'Password'} onChange={(event) => this.setState({password: event.target.value})}/>
+          <Input type={'password'} placeholder={'Password'}
+                 onChange={(event) => this.setState({password: event.target.value})}/>
           <Button onClick={this.handleSubmit.bind(this)}>로그인</Button>
+          <div>
+            <small>아직 회원이 아니신가요?</small>
+            <RegisterMessage href={'/register'}>회원가입</RegisterMessage>
+          </div>
         </InputWrapper>
       </Wrapper>
     );
