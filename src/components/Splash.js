@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   height: 100%;
   background: #65C7F7;
   animation: splash 3s;
+  z-index: 100;
   
   @keyframes splash {
     0% {

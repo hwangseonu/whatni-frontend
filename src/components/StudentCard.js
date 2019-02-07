@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import profile from '../assets/images/profile.jpg';
 import barcode from '../assets/images/barcode.gif';
+import stamp from '../assets/images/stamp.png';
 
 const Headaer = styled.div`
   display: flex;
@@ -25,8 +26,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: calc(100% - 77px);
+  width: 500px;
+  position: fixed;
+  top: 75px;
+  height: 100%;
+  z-index: 0;
 `;
 
 const Card = styled.div`
@@ -58,13 +62,24 @@ const BarcodeWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  width: 360px;
-  height: 150px;
+  width: 100%;
+  padding: 10px;
   border: 2px solid #000;
 `;
 
 const Barcode = styled.img`
-  width: 246px;
+  width: 80%;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StampWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 class StudentCard extends Component {
@@ -82,6 +97,13 @@ class StudentCard extends Component {
             <BarcodeWrapper>
               <Barcode src={barcode}/>
             </BarcodeWrapper>
+            <Footer>
+              <small>위 학생은 본교 학생임을 증명함</small>
+              <StampWrapper>
+                <small style={{fontWeight: 'bold', marginRight: '20px'}}>OO고등학교장</small>
+                <img width={'50px'} height={'50px'} src={stamp} alt={'stamp'}/>
+              </StampWrapper>
+            </Footer>
           </Card>
         </Wrapper>
       </div>
