@@ -31,6 +31,7 @@ const Wrapper = styled.div`
   top: 75px;
   height: 100%;
   z-index: 0;
+  background: #FFF;
 `;
 
 const Card = styled.div`

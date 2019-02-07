@@ -1,13 +1,80 @@
 import React, {Component} from 'react';
+import Clock from 'react-live-clock';
+import styled from 'styled-components';
 
 import StudentCard from '../../components/StudentCard';
+
+import background from '../../assets/images/background.png';
+
+const Wrapper = styled.div`
+  background: url(${background}) no-repeat center center fixed;
+  background-size: cover;
+`;
+
+const MainWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 500px;
+  width: calc(100vw - 500px);
+  height: 100vh;
+`;
+
+const Date = styled.div`
+  font-size: 2em;
+  font-weight: bold;
+  color: #FFF;
+`;
+
+const Time = styled.div`
+  font-size: 6em;
+  font-weight: bold;
+  color: #FFF;
+`;
+
+const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Input = styled.input`
+  width: 30vmax;
+  height: 50px;
+  border: 1px solid #000;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 1.3em;
+  text-align: center;
+`;
+
+const Button = styled.button`
+  width: 30vmax;
+  height: 50px;
+  border: none;
+  border-radius: 25px;
+  background: #5978E3;
+  font-size: 1.3em;
+  color: #FFF;
+`;
 
 class Main extends Component {
   render() {
     return (
-      <div className={'main'}>
+      <Wrapper className={'main'}>
         <StudentCard/>
-      </div>
+        <MainWrapper>
+          <Date><Clock format={'YYYY.MM.DD'} ticking={true}/></Date>
+          <Time><Clock format={'HH:mm:ss'} ticking={true}/></Time>
+          <Form>
+            <Input placeholder={'출석코드'}/>
+            <Button>출석</Button>
+          </Form>
+        </MainWrapper>
+      </Wrapper>
     );
   }
 }
