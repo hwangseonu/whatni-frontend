@@ -1,16 +1,27 @@
 import React, {Component} from 'react';
+import DatePicker from 'react-date-picker';
 import {observer, inject} from 'mobx-react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import blank from '../../assets/images/profile.png';
 import background from '../../assets/images/background.png';
-import Loading from "./Login";
+import Loading from "../../components/Loading";
 
 const Wrapper = styled.div`
   background: url(${background}) no-repeat center center fixed;
   background-size: cover;
   width: 100%;
   min-height: 100vh;
+  & .react-date-picker__wrapper {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #000;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1.3em;
+  }
 `;
 
 const Header = styled.div`
@@ -83,7 +94,7 @@ const FileSelectorWrapper = styled.div`
 `;
 
 const FileImg = styled.img`
-  width: 200px;
+  width: 100px;
 `;
 
 const FileSelector = styled.input`
@@ -111,10 +122,10 @@ class Register extends Component {
     username: '',
     password: '',
     name: '',
-    birth: '',
+    birth: new Date(),
     studentId: '',
     profileImage: '',
-    isFocusBirth: false
+    isFocus: false
   };
 
   pngToB64(event) {
@@ -169,11 +180,10 @@ class Register extends Component {
               <Input placeholder={'Password'} type={'password'}
                      onChange={({target}) => this.setState({password: target.value})}/>
               <Input placeholder={'이름'} onChange={({target}) => this.setState({name: target.value})}/>
-              <Input placeholder={'생년월일'} type={this.state.isFocusBirth ? 'date' : 'text'}
-                     onChange={({target}) => this.setState({birth: target.value})}
-                     value={this.state.isFocusBirth ? '2000-01-01' : ''}
-                     onFocus={() => this.setState({isFocusBirth: true})}
-                     onBlur={() => this.setState({isFocusBirth: false})}/>
+              {this.state.isFocus ? <DatePicker
+                onChange={(date) => this.setState({birth: moment(date).format("YYYY-MM-DD")})}/> :
+                <Input placeholder={'생년월일'} onFocus={() => this.setState({isFocus: true})} />
+              }
               <Input placeholder={'학번'} type={'number'}
                      onChange={({target}) => this.setState({studentId: target.value})}/>
             </InputWrapper>

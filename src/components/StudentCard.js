@@ -4,7 +4,6 @@ import {observer, inject} from 'mobx-react';
 import styled from 'styled-components';
 import moment from 'moment';
 
-import profile from '../assets/images/profile.png';
 import stamp from '../assets/images/stamp.png';
 
 const Wrapper = styled.div`
@@ -107,7 +106,7 @@ class StudentCard extends Component {
         </Headaer>
         <Body>
           <Card>
-            <Profile src={profile}/>
+            <Profile src={user.profileImage}/>
             <Name>{user.name}</Name>
             <Birth>생년월일: {moment(user.birth).format('YYYY.MM.DD')}</Birth>
             <BarcodeWrapper>
