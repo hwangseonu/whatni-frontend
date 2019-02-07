@@ -7,6 +7,15 @@ import moment from 'moment';
 import profile from '../assets/images/profile.jpg';
 import stamp from '../assets/images/stamp.png';
 
+const Wrapper = styled.div`
+  width: 500px;
+  min-height: 100vh;
+  
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
 const Headaer = styled.div`
   display: flex;
   justify-content: center;
@@ -14,6 +23,7 @@ const Headaer = styled.div`
   width: 100%;
   height: 75px;
   background: #65C6F7;
+  overflow: hidden;
 `;
 
 const Title = styled.span`
@@ -24,15 +34,12 @@ const Title = styled.span`
   margin-right: -1.5em;
 `;
 
-const Wrapper = styled.div`
+const Body = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  position: fixed;
-  top: 75px;
-  height: 100%;
-  z-index: 0;
+  width: 100%;
+  min-height: calc(100vh - 75px);
   background: #FFF;
 `;
 
@@ -40,6 +47,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 const Profile = styled.img`
@@ -64,9 +72,8 @@ const BarcodeWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 50%;
   margin-top: 20px;
-  width: 80%;
-  padding: 10px;
   border: 2px solid #000;
 `;
 
@@ -87,20 +94,18 @@ class StudentCard extends Component {
 
   componentDidMount() {
     const {student} = this.props;
-    student.getUserData().then(res => {
-      if (!student.isLogin) window.location.href = '/login';
-    }).catch(_ => {});
+    student.getUserData().then().catch(_ => window.location.href = '/login');
   }
 
   render() {
     const {user} = this.props.student;
 
     return (
-      <div className={'student-card'} style={{width: '500px', height: '100vh'}}>
+      <Wrapper className={'student-card'}>
         <Headaer>
           <Title>학생증</Title>
         </Headaer>
-        <Wrapper>
+        <Body>
           <Card>
             <Profile src={profile}/>
             <Name>{user.name}</Name>
@@ -116,8 +121,8 @@ class StudentCard extends Component {
               </StampWrapper>
             </Footer>
           </Card>
-        </Wrapper>
-      </div>
+        </Body>
+      </Wrapper>
     );
   }
 }

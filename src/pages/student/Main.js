@@ -9,6 +9,11 @@ import background from '../../assets/images/background.png';
 const Wrapper = styled.div`
   background: url(${background}) no-repeat center center fixed;
   background-size: cover;
+  display: flex;
+  
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const MainWrapper = styled.div`
@@ -16,21 +21,22 @@ const MainWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 500px;
   width: calc(100vw - 500px);
   height: 100vh;
+  
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Date = styled.div`
-  font-size: 2em;
+  font-size: 1em;
   font-weight: bold;
   color: #FFF;
 `;
 
 const Time = styled.div`
-  font-size: 6em;
+  font-size: 4em;
   font-weight: bold;
   color: #FFF;
 `;
