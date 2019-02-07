@@ -50,6 +50,7 @@
     "react-cookies": "^0.1.0",
     "react-dev-utils": "^7.0.1",
     "react-dom": "^16.8.0",
+    "react-file-picker": "^0.0.5",
     "react-live-clock": "^3.0.0",
     "react-loading": "^2.0.3",
     "react-router-dom": "^4.3.1",

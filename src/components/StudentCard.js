@@ -4,7 +4,7 @@ import {observer, inject} from 'mobx-react';
 import styled from 'styled-components';
 import moment from 'moment';
 
-import profile from '../assets/images/profile.jpg';
+import profile from '../assets/images/profile.png';
 import stamp from '../assets/images/stamp.png';
 
 const Wrapper = styled.div`
