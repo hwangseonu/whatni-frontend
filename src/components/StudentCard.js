@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import Barcode from 'react-barcode';
+import {observer, inject} from 'mobx-react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import profile from '../assets/images/profile.jpg';
-import barcode from '../assets/images/barcode.gif';
 import stamp from '../assets/images/stamp.png';
 
 const Headaer = styled.div`
@@ -63,13 +65,9 @@ const BarcodeWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  width: 100%;
+  width: 80%;
   padding: 10px;
   border: 2px solid #000;
-`;
-
-const Barcode = styled.img`
-  width: 80%;
 `;
 
 const Footer = styled.div`
@@ -83,8 +81,18 @@ const StampWrapper = styled.div`
   align-items: center;
 `;
 
+@inject('student')
+@observer
 class StudentCard extends Component {
+
+  componentDidMount() {
+    const {student} = this.props;
+    student.getUserData().catch(_ => {});
+  }
+
   render() {
+    const {user} = this.props.student;
+
     return (
       <div className={'student-card'} style={{width: '500px', height: '100vh'}}>
         <Headaer>
@@ -93,10 +101,10 @@ class StudentCard extends Component {
         <Wrapper>
           <Card>
             <Profile src={profile}/>
-            <Name>황선우</Name>
-            <Birth>생년월일: 2002.04.15</Birth>
+            <Name>{user.name}</Name>
+            <Birth>생년월일: {moment(user.birth).format('YYYY.MM.DD')}</Birth>
             <BarcodeWrapper>
-              <Barcode src={barcode}/>
+              <Barcode value={moment(user.birth).format('YYYY-MM-DD') + '-' + user.studentId}/>
             </BarcodeWrapper>
             <Footer>
               <small>위 학생은 본교 학생임을 증명함</small>

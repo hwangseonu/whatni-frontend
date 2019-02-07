@@ -79,7 +79,7 @@ class Login extends Component {
       student.login(username, password).then(res => {
         this.setState({loading: false});
         alert("로그인되었습니다.");
-        window.location.reload();
+        window.location.href = '/';
       }).catch(err => {
         this.setState({loading: false});
         alert("로그인에 실패했습니다.");
