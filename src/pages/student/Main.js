@@ -47,7 +47,7 @@ const Form = styled.div`
 `;
 
 const Input = styled.input`
-  width: 30vmax;
+  width: 30vw;
   height: 50px;
   border: 1px solid #000;
   border-radius: 25px;
@@ -55,16 +55,24 @@ const Input = styled.input`
   font-weight: bold;
   font-size: 1.3em;
   text-align: center;
+  
+  @media screen and (max-width: 768px) {
+    width: 70vw;
+  }
 `;
 
 const Button = styled.button`
-  width: 30vmax;
+  width: 30vw;
   height: 50px;
   border: none;
   border-radius: 25px;
   background: #5978E3;
   font-size: 1.3em;
   color: #FFF;
+  
+  @media screen and (max-width: 768px) {
+    width: 70vw;
+  }
 `;
 
 class Main extends Component {
