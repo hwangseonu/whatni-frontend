@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import {observer, inject} from 'mobx-react';
 import styled from 'styled-components';
 
 import blank from '../../assets/images/profile.png';
 import background from '../../assets/images/background.png';
+import Loading from "./Login";
 
 const Wrapper = styled.div`
   background: url(${background}) no-repeat center center fixed;
@@ -89,7 +91,7 @@ const FileSelector = styled.input`
 `;
 
 const Button = styled.button`
-  width: 650px;
+  width: 550px;
   height: 50px;
   border: none;
   border-radius: 25px;
@@ -102,6 +104,8 @@ const Button = styled.button`
   }
 `;
 
+@inject('student')
+@observer
 class Register extends Component {
   state = {
     username: '',
@@ -124,14 +128,37 @@ class Register extends Component {
     reader.readAsDataURL(file);
   }
 
+  handleSubmit() {
+    const {student} = this.props;
+    const {username, password, name, birth, studentId, profileImage} = this.state;
+
+    if (username && password && name && birth && studentId && profileImage) {
+      this.setState({loading: true});
+      student.register(username, password, name, studentId, birth, profileImage).then(res => {
+        this.setState({loading: true});
+        alert("회원가입 되었습니다.");
+        window.location.href = '/';
+      }).catch(err => {
+        this.setState({loading: false});
+        alert("회원가입에 실패했습니다. 정보를 다시 확인해 주세요.");
+      })
+
+    } else {
+      alert("빈칸이 있습니다.");
+    }
+  }
+
   render() {
     return (
       <Wrapper>
+        {this.state.loading ? <Loading/> : null}
         <Header>
           <Title>WhatNi</Title>
           <Description>고품격 출석체크 서비스</Description>
         </Header>
-        <Body>
+        <Body nKeyPress={(event) => {
+          if (event.key === 'Enter') this.handleSubmit()
+        }}>
           <Form>
             <FileSelectorWrapper>
               <FileImg src={!this.state.profileImage ? blank : this.state.profileImage} alt={'프로필이미지'}/>
@@ -139,17 +166,19 @@ class Register extends Component {
             </FileSelectorWrapper>
             <InputWrapper>
               <Input placeholder={'Username'} onChange={({target}) => this.setState({username: target.value})}/>
-              <Input placeholder={'Password'} type={'password'} onChange={({target}) => this.setState({password: target.value})}/>
+              <Input placeholder={'Password'} type={'password'}
+                     onChange={({target}) => this.setState({password: target.value})}/>
               <Input placeholder={'이름'} onChange={({target}) => this.setState({name: target.value})}/>
               <Input placeholder={'생년월일'} type={this.state.isFocusBirth ? 'date' : 'text'}
                      onChange={({target}) => this.setState({birth: target.value})}
                      value={this.state.isFocusBirth ? '2000-01-01' : ''}
                      onFocus={() => this.setState({isFocusBirth: true})}
                      onBlur={() => this.setState({isFocusBirth: false})}/>
-              <Input placeholder={'학번'} type={'number'} onChange={({target}) => this.setState({studentId: target.value})}/>
+              <Input placeholder={'학번'} type={'number'}
+                     onChange={({target}) => this.setState({studentId: target.value})}/>
             </InputWrapper>
           </Form>
-          <Button>회원가입</Button>
+          <Button onClick={this.handleSubmit.bind(this)}>회원가입</Button>
         </Body>
       </Wrapper>
     )

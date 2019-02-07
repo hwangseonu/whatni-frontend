@@ -32,6 +32,7 @@ class StudentStore {
         birth,
         profileImage
       }).then(res => {
+        cookie.save('JWT', res.data.access, {path: '/'});
         resolve(res);
       }).catch(err => {
         reject(err);
