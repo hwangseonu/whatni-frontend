@@ -87,7 +87,9 @@ class StudentCard extends Component {
 
   componentDidMount() {
     const {student} = this.props;
-    student.getUserData().catch(_ => {});
+    student.getUserData().then(res => {
+      if (!student.isLogin) window.location.href = '/login';
+    }).catch(_ => {});
   }
 
   render() {
