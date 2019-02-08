@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
 
 import SLogin from './pages/student/Login';
@@ -8,7 +8,8 @@ import SMain from './pages/student/Main';
 import Splash from './components/Splash';
 
 import ADefault from './pages/admin/Default';
-import AMain from './pages/admin/Main';
+import AAttendance from './pages/admin/Attendance';
+import ACode from './pages/admin/Code';
 
 class App extends Component {
   render() {
@@ -22,11 +23,14 @@ class App extends Component {
               <Route path={'/login'} component={SLogin} exact/>
               <Route path={'/register'} component={SRegister} exact/>
             </Fragment>
-            <Route path={'/admin'} component={ADefault}/>
-            <Fragment>
-              <Route path={'/admin'} component={AMain} exact/>
-              <Route/>
-            </Fragment>
+            <Route render={() =>
+              <ADefault>
+                <Switch>
+                  <Route path={'/admin/attendance'} component={AAttendance} exact/>
+                  <Route path={'/admin/code'} component={ACode} exact/>
+                </Switch>
+              </ADefault>
+            }/>
           </Fragment>
         </BrowserRouter>
       </div>
