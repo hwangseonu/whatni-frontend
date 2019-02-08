@@ -2,10 +2,12 @@ import React, {Component, Fragment} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
 
-import Login from './pages/student/Login';
-import Register from './pages/student/Register';
-import Main from './pages/student/Main';
+import SLogin from './pages/student/Login';
+import SRegister from './pages/student/Register';
+import SMain from './pages/student/Main';
 import Splash from './components/Splash';
+
+import AMain from './pages/admin/Main';
 
 class App extends Component {
   render() {
@@ -15,9 +17,12 @@ class App extends Component {
           <Fragment>
             <Route path={'/'} component={Splash}/>
             <Fragment>
-              <Route path={'/'} component={Main} exact/>
-              <Route path={'/login'} component={Login} exact/>
-              <Route path={'/register'} component={Register} exact/>
+              <Route path={'/'} component={SMain} exact/>
+              <Route path={'/login'} component={SLogin} exact/>
+              <Route path={'/register'} component={SRegister} exact/>
+            </Fragment>
+            <Fragment>
+              <Route path={'/admin'} component={AMain}/>
             </Fragment>
           </Fragment>
         </BrowserRouter>
