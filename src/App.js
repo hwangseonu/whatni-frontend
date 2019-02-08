@@ -7,6 +7,7 @@ import SRegister from './pages/student/Register';
 import SMain from './pages/student/Main';
 import Splash from './components/Splash';
 
+import ADefault from './pages/admin/Default';
 import AMain from './pages/admin/Main';
 
 class App extends Component {
@@ -21,8 +22,10 @@ class App extends Component {
               <Route path={'/login'} component={SLogin} exact/>
               <Route path={'/register'} component={SRegister} exact/>
             </Fragment>
+            <Route path={'/admin'} component={ADefault}/>
             <Fragment>
-              <Route path={'/admin'} component={AMain}/>
+              <Route path={'/admin'} component={AMain} exact/>
+              <Route/>
             </Fragment>
           </Fragment>
         </BrowserRouter>

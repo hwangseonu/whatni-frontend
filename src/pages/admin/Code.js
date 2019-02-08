@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
 
-class Main extends Component {
+import Header from '../../components/AdminHeader';
+
+class Code extends Component {
   render() {
     return (
       <div>
@@ -10,4 +11,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default Code;
