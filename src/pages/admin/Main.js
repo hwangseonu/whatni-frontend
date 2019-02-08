@@ -24,7 +24,7 @@ const ChildWrapper = styled.div`
   padding: 5vw;
 `;
 
-class Default extends Component {
+class Main extends Component {
   render() {
     return (
       <Wrapper>
@@ -39,4 +39,4 @@ class Default extends Component {
   }
 }
 
-export default Default;
+export default Main;
